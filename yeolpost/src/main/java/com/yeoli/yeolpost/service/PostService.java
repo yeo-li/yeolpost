@@ -1,8 +1,11 @@
 package com.yeoli.yeolpost.service;
 
-import com.yeoli.yeolpost.model.dto.PostGetByTitleResponse;
-import com.yeoli.yeolpost.model.dto.PostSaveRequest;
-import com.yeoli.yeolpost.model.dto.PostSummaryDto;
+import com.yeoli.yeolpost.model.dto.PostCreateCommand;
+import com.yeoli.yeolpost.model.dto.PostListResponse;
+import com.yeoli.yeolpost.model.dto.PostSearchRequest;
+import com.yeoli.yeolpost.model.dto.PostSearchResponse;
+import com.yeoli.yeolpost.model.dto.PostSummaryListResponse;
+import com.yeoli.yeolpost.model.dto.PostSummaryResponse;
 import com.yeoli.yeolpost.model.entity.Post;
 import com.yeoli.yeolpost.model.entity.User;
 import com.yeoli.yeolpost.repository.PostRepository;
@@ -20,26 +23,28 @@ public class PostService {
   private final UserRepository userRepository;
 
   @Transactional
-  public void savePost(PostSaveRequest request) {
-    User user = userRepository.findByUserName(request.getUserName())
-        .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다." + request.getUserName()));
+  public void savePost(PostCreateCommand command) {
+    User user = userRepository.findByUserName(command.userName())
+        .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다." + command.userName()));
 
     Post post = new Post(
-        request.getCreatedAt(),
-        request.getTitle(),
-        request.getContent(),
+        command.createdAt(),
+        command.title(),
+        command.content(),
         user
     );
 
     postRepository.save(post);
   }
 
-  public List<PostSummaryDto> getAllPosts() {
-    return postRepository.findAllPostSummaries();
+  public PostSummaryListResponse getAllPosts() {
+    List<PostSummaryResponse> postsSummary = postRepository.findAllPostSummaries();
+    return new PostSummaryListResponse(postsSummary);
   }
 
-  public List<PostGetByTitleResponse> getPostsByTitle(String title) {
-    return postRepository.findByTitle(title);
+  public PostListResponse getPostsByTitle(PostSearchRequest request) {
+    List<PostSearchResponse> posts = postRepository.findByTitle(request.title());
+    return new PostListResponse(posts);
   }
 
   // BCNF 퀴즈 나옴

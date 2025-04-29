@@ -5,6 +5,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import com.yeoli.yeolpost.model.entity.Post;
 import com.yeoli.yeolpost.model.entity.User;
 import jakarta.transaction.Transactional;
+import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,7 +26,7 @@ class PostRepositoryTest {
     User user = new User("user1", "password");
     userRepository.save(user);
 
-    Post post = new Post("hello post", "반갑습니다 여러분 테스트 글이에용~", user);
+    Post post = new Post(LocalDateTime.now(), "hello post", "반갑습니다 여러분 테스트 글이에용~", user);
     postRepository.save(post);
 
     // when
@@ -38,12 +39,4 @@ class PostRepositoryTest {
     assertThat(foundPost.getUser().getUserName()).isEqualTo("user1");
   }
 
-  @Test
-  void 게시글을_조회하고_삭제한다() {
-    // given
-    
-    // when
-
-    // then
-  }
 }
