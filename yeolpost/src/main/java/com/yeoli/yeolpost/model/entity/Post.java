@@ -20,7 +20,7 @@ public class Post {
 
   @Id // PK 라는 뜻
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long post_id;
+  private Long postId;
 
   @Column(nullable = false, length = 255)
   private String title;
@@ -29,9 +29,16 @@ public class Post {
   private String content;
 
   @Column(nullable = false)
-  private LocalDateTime created_at = LocalDateTime.now();
+  private LocalDateTime createdAt;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "user_id", nullable = false)
   private User user;
+
+  public Post(LocalDateTime createdAt, String title, String content, User user) {
+    this.createdAt = createdAt;
+    this.title = title;
+    this.content = content;
+    this.user = user;
+  }
 }

@@ -3,9 +3,10 @@ package com.yeoli.yeolpost.model.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import java.util.UUID;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.UUID;
 
 @Entity
 @Getter
@@ -13,12 +14,24 @@ import org.hibernate.validator.constraints.UUID;
 public class User {
 
   @Id
-  @UUID
-  private Long user_id;
+  private String userId;
 
   @Column(nullable = false)
-  private String username;
+  private String userName;
 
   @Column(nullable = false)
   private String password;
+
+  @PrePersist
+  public void generateUUID() {
+    if (this.userId == null) {
+      this.userId = UUID.randomUUID().toString();
+    }
+  }
+
+  public User(String userName, String password) {
+    this.userName = userName;
+    this.password = password;
+    generateUUID();
+  }
 }
