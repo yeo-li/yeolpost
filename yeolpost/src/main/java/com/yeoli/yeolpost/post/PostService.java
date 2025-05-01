@@ -1,15 +1,13 @@
-package com.yeoli.yeolpost.service;
+package com.yeoli.yeolpost.post;
 
-import com.yeoli.yeolpost.model.dto.PostCreateCommand;
-import com.yeoli.yeolpost.model.dto.PostListResponse;
-import com.yeoli.yeolpost.model.dto.PostSearchRequest;
-import com.yeoli.yeolpost.model.dto.PostSearchResponse;
-import com.yeoli.yeolpost.model.dto.PostSummaryListResponse;
-import com.yeoli.yeolpost.model.dto.PostSummaryResponse;
-import com.yeoli.yeolpost.model.entity.Post;
-import com.yeoli.yeolpost.model.entity.User;
-import com.yeoli.yeolpost.repository.PostRepository;
-import com.yeoli.yeolpost.repository.UserRepository;
+import com.yeoli.yeolpost.post.dto.PostCreateCommand;
+import com.yeoli.yeolpost.post.dto.PostListResponse;
+import com.yeoli.yeolpost.post.dto.PostSearchRequest;
+import com.yeoli.yeolpost.post.dto.PostSearchResponse;
+import com.yeoli.yeolpost.post.dto.PostSummaryListResponse;
+import com.yeoli.yeolpost.post.dto.PostSummaryResponse;
+import com.yeoli.yeolpost.user.User;
+import com.yeoli.yeolpost.user.UserRepository;
 import jakarta.transaction.Transactional;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

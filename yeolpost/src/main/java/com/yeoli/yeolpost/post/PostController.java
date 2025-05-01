@@ -1,15 +1,15 @@
-package com.yeoli.yeolpost.controller;
+package com.yeoli.yeolpost.post;
 
-import com.yeoli.yeolpost.model.dto.CommonResponse;
-import com.yeoli.yeolpost.model.dto.PostCreateRequest;
-import com.yeoli.yeolpost.model.dto.PostListResponse;
-import com.yeoli.yeolpost.model.dto.PostSearchRequest;
-import com.yeoli.yeolpost.model.dto.PostSummaryListResponse;
-import com.yeoli.yeolpost.service.PostService;
+import com.yeoli.yeolpost.post.dto.CommonResponse;
+import com.yeoli.yeolpost.post.dto.PostCreateRequest;
+import com.yeoli.yeolpost.post.dto.PostListResponse;
+import com.yeoli.yeolpost.post.dto.PostSearchRequest;
+import com.yeoli.yeolpost.post.dto.PostSummaryListResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,5 +35,11 @@ public class PostController {
   public CommonResponse<PostListResponse> getPosts(
       @RequestParam("title") @Valid PostSearchRequest request) {
     return new CommonResponse<>(200, "게시글 검색 성공", postService.getPostsByTitle(request));
+  }
+
+  @PutMapping(value = "/api/posts/{postId}")
+  public CommonResponse<Void> putPosts() {
+
+    return new CommonResponse<>(200, "게시글 수정 성공", null);
   }
 }

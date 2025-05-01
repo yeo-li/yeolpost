@@ -1,4 +1,4 @@
-package com.yeoli.yeolpost.model.dto;
+package com.yeoli.yeolpost.post.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

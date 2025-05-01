@@ -1,4 +1,4 @@
-package com.yeoli.yeolpost.model.entity;
+package com.yeoli.yeolpost.user;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -2,8 +2,10 @@ package com.yeoli.yeolpost.repository;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import com.yeoli.yeolpost.model.entity.Post;
-import com.yeoli.yeolpost.model.entity.User;
+import com.yeoli.yeolpost.post.Post;
+import com.yeoli.yeolpost.post.PostRepository;
+import com.yeoli.yeolpost.user.User;
+import com.yeoli.yeolpost.user.UserRepository;
 import jakarta.transaction.Transactional;
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;

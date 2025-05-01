@@ -1,4 +1,4 @@
-package com.yeoli.yeolpost.model.dto;
+package com.yeoli.yeolpost.post.dto;
 
 public record CommonResponse<T>(int status, String message, T data) {
 

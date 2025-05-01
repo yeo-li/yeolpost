@@ -1,5 +1,6 @@
-package com.yeoli.yeolpost.model.entity;
+package com.yeoli.yeolpost.post;
 
+import com.yeoli.yeolpost.user.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
