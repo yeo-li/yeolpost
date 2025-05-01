@@ -7,4 +7,5 @@ public record CommonResponse<T>(int status, String message, T data) {
     this.message = message;
     this.data = data;
   }
+
 }

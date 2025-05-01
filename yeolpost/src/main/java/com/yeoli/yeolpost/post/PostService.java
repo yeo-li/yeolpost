@@ -6,8 +6,10 @@ import com.yeoli.yeolpost.post.dto.PostSearchRequest;
 import com.yeoli.yeolpost.post.dto.PostSearchResponse;
 import com.yeoli.yeolpost.post.dto.PostSummaryListResponse;
 import com.yeoli.yeolpost.post.dto.PostSummaryResponse;
+import com.yeoli.yeolpost.post.dto.PostUpdateRequest;
 import com.yeoli.yeolpost.user.User;
 import com.yeoli.yeolpost.user.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -43,6 +45,16 @@ public class PostService {
   public PostListResponse getPostsByTitle(PostSearchRequest request) {
     List<PostSearchResponse> posts = postRepository.findByTitle(request.title());
     return new PostListResponse(posts);
+  }
+
+  @Transactional
+  public void updatePost(Long postId, PostUpdateRequest request) {
+    request.validate();
+    
+    Post post = postRepository.findById(postId)
+        .orElseThrow(() -> new EntityNotFoundException("게시물을 찾을 수 없습니다."));
+
+    post.update(request.title(), request.content());
   }
 
   // BCNF 퀴즈 나옴

@@ -5,9 +5,11 @@ import com.yeoli.yeolpost.post.dto.PostCreateRequest;
 import com.yeoli.yeolpost.post.dto.PostListResponse;
 import com.yeoli.yeolpost.post.dto.PostSearchRequest;
 import com.yeoli.yeolpost.post.dto.PostSummaryListResponse;
+import com.yeoli.yeolpost.post.dto.PostUpdateRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,14 +34,17 @@ public class PostController {
   }
 
   @GetMapping(value = "/api/posts", params = "title")
-  public CommonResponse<PostListResponse> getPosts(
+  public CommonResponse<PostListResponse> searchPosts(
       @RequestParam("title") @Valid PostSearchRequest request) {
     return new CommonResponse<>(200, "게시글 검색 성공", postService.getPostsByTitle(request));
   }
 
   @PutMapping(value = "/api/posts/{postId}")
-  public CommonResponse<Void> putPosts() {
-
+  public CommonResponse<Void> updatePosts(
+      @PathVariable Long postId,
+      @RequestBody @Valid PostUpdateRequest request
+  ) {
+    postService.updatePost(postId, request);
     return new CommonResponse<>(200, "게시글 수정 성공", null);
   }
 }
