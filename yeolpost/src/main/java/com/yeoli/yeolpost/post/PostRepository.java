@@ -14,4 +14,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
   @Query("SELECT new com.yeoli.yeolpost.post.dto.PostSearchResponse(p.createdAt, p.title, p.content, p.user) FROM Post p WHERE p.title LIKE CONCAT('%', :title, '%')")
   List<PostSearchResponse> findByTitle(@Param("title") String title);
+
+  // test
 }
